@@ -11,7 +11,7 @@ This perl module allow one to connect to the robot via TCP and control
 the robot using perl.  The license is GPL v2 or later.
 
 The latest version of this will show up on
-<URL: http://wiki.nuug.no/grupper/robot >
+http://wiki.nuug.no/grupper/robot
 
 The GUI application need libqt-perl installed.
 
