@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+
+use IO::Socket;
+use Robotics::Spykee;
+
+my %robot;
+Robotics::Spykee::discover(sub {$robot{$_[0]} = $_[1]});
+
+for my $host (keys %robot) {
+    print "Trying to connect to $host " . $robot{$host} . "\n";
+    my $spykee = Robotics::Spykee->new(hostname => $host,
+                             videohook => \&videohook);
+    $spykee->wireless_networks();
+    $spykee->get_config();
+    $spykee->get_log();
+    if (0) {
+    $spykee->left();
+    sleep 2;
+    $spykee->right();
+    sleep 2;
+    $spykee->forward();
+    sleep 2;
+    $spykee->back();
+    sleep 2;
+    $spykee->stop();
+
+    $spykee->send_mp3("file.mp3");
+    $spykee->audio_play($Robotics::Spykee::FILE_ID_MUSIC);
+    }
+
+    $spykee->video_set(1);
+
+    while (1) {
+        my $read_set = new IO::Select();
+        my $sock = $spykee->{socket};
+        $read_set->add($sock);
+        my ($rh_set) = IO::Select->select($read_set, undef, undef, 10);
+        for my $rh (@$rh_set) {
+            if ($sock == $rh) {
+                $spykee->process_packet();
+            }
+        }
+    }
+}
+
+sub videohook {
+    my ($size, $data) = @_;
+    open(my $fh, ">", "test.jpeg");
+    print $fh $data;
+    close($fh);
+}

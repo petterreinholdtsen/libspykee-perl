@@ -1,0 +1,15 @@
+Source: libspykee-perl
+Section: perl
+Priority: optional
+Maintainer: Petter Reinholdtsen <pere@debian.org>
+Build-Depends: debhelper, libqt-perl
+Standards-Version: 3.9.1
+
+Package: libspykee-perl
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends}, ${perl:Depends}, libqt-perl
+Description: Perl module to control a Spykee robot
+ Perl interface to communicate via TCP and UDP over the wireless
+ network to control the Spykee robot.
+

@@ -1,0 +1,5 @@
+libspykee-perl (0.0.20101009-1) private; urgency=low
+
+  * Initial version.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 09 Oct 2010 13:38:29 +0200
